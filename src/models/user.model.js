@@ -50,7 +50,7 @@ type: String,
 
 UserSchema.pre("save", async function (next){
     if(!this.isModified("password")) return next();
-    this.password = bycrypt.hash(this.password,10)
+    this.password = await bycrypt.hash(this.password,10)
     next()
 })
 
