@@ -1,1 +1,1 @@
-export const DB_NAME="PlayPulse";
+export const DB_NAME="PlayPulse"
