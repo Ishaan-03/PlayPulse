@@ -57,31 +57,32 @@ UserSchema.pre("save", async function (next){
 UserSchema.methods.isPasswordCorrect= async function (password){
   return await bycrypt.compare(password,this.password);
 }
-UserSchema.methods.generateAccessTokens = function(){
-    jwt.sign(
+
+UserSchema.methods.generateAccessTokens = function() {
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email, 
             username: this.username,
-            fullName : this.fullName
-
+            fullName: this.fullName
         },
-        process.env.ACCESS_TOKEN_SECRET,{
+        process.env.ACCESS_TOKEN_SECRET,
+        {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
-    )
+    );
 }
-UserSchema.methods.generateRefreshTokens = function (){
-    jwt.sign(
-        {
-            _id: this._id,
-           
 
+UserSchema.methods.generateRefreshTokens = function() {
+    return jwt.sign(
+        {
+            _id: this._id
         },
-        process.env.REFRESH_TOKEN_SECRET,{
+        process.env.REFRESH_TOKEN_SECRET,
+        {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
-    )
+    );
 }
 
 
